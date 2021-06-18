@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>máy tính Google</title>
+    <!-- B1: Xác định số hàng, số cột của máy tính.
+ Hình dung giao diện Máy tính cơ bản
+- B2: Ấn nút thì màn hình nhận giá trị của nút
+- B3: Tính toán dãy biểu thức trên màn Hình
+- B4: Hiển thị kết quả
+- B5: Trang điểm bằng CSS
+- B6: Phát triển các tính năng khác -->
+</head>
+
+<style>
+    /* dùng style td cho hàng cột to lên */
+    td {
+        width: 80px;
+        height: 40px;
+    }
+    /* margin: auto;cach ddeu hai bên */
+    table {
+        margin: auto;
+    }
+
+    button {
+        /* tạo nut button tỷ lệ với côt td */
+        width: 80px;
+        height: 100%;
+    }
+
+    button {
+        background: #f1f3f4;
+        color: #202124;
+        border: 1px solid #f1f3f4;
+        border-radius: 10px;
+    }
+    
+    .mau-xam {
+        background: #dadce0;
+        color: #202124;
+        border: 1px solid #dadce0;
+        border-radius: 10px;
+        /* border-radius: bo tròn đường viền */
+        box-sizing: border-box;
+    }
+
+    #man-hinh {
+        /* canh phải du lieu */
+        background: #f1f3f4;
+        border-radius: 10px;
+        /* border-radius: bo tròn đường viền */
+        text-align: right;
+        font-size: 30px;
+    }
+    
+    #bieu-thuc {
+        background: #f1f3f4;
+        border-radius: 10px;
+        /* border-radius: bo tròn đường viền */
+        text-align: right;
+    }
+
+    </style>
+
+<body>
+<table>
+    <!--<table border="1px" align="center"> đưa bản ra giũa -->
+    <!-- cellspacing=0 -->
+    <!-- Cellspacing: khoảng cách giữa các ô trong table -->
+    <tr>
+        <!-- colspan khoi dong các cột -->
+        <td id="bieu-thuc" colspan="5"></td>
+    </tr>
+    <tr>
+        <td id="man-hinh" colspan="5"></td>
+    </tr>
+</tr>
+<tr>
+    <!-- <button> tạo nut </button> -->
+    <!-- nhóm vao class để tạo màu -->
+    <!-- clickCell truyen du lieu -->
+    
+    <td><button class="mau-xam" onclick="tinhSin()">sin</button></td>
+    <td><button class="mau-xam" onclick="clickCell('(')">(</button></td>
+    <td><button class="mau-xam" onclick="clickCell(')')">)</button></td>
+    <td><button class="mau-xam" onclick="xoaKyTu()">DEL</button></td>
+    <td><button class="mau-xam" onclick="xoaManHinh()">AC</button></td>
+</tr>
+<tr>
+    <td><button class="mau-xam" onclick="tinhcos()">cos</button></td>
+    <td><button onclick="clickCell(7)">7</button></td>
+    <td><button onclick="clickCell(8)">8</button></td>
+    <td><button onclick="clickCell(9)">9</button></td>
+    <td><button class="mau-xam" onclick="clickCell('+')">+</button></td>
+</tr>
+<tr>
+    <td><button class="mau-xam" onclick="tinhtan()">tan</button></td>
+    <td><button onclick="clickCell(4)">4</button></td>
+    <td><button onclick="clickCell(5)">5</button></td>
+    <td><button onclick="clickCell(6)">6</button></td>
+    <td><button class="mau-xam" onclick="clickCell('-')">-</button></td>
+</tr>
+<tr>
+    <td><button class="mau-xam" onclick="tinhlog()">log</button></td>
+    <td><button onclick="clickCell(1)">1</button></td>
+    <td><button onclick="clickCell(2)">2</button></td>
+    <td><button onclick="clickCell(3)">3</button></td>
+    <td><button class="mau-xam" onclick="clickCell('*')">X</button></td>
+</tr>
+<tr>
+    <td><button class="mau-xam" onclick="tinhrad()">rad</button></td>
+    <td><button onclick="clickCell(0)">0</button></td>
+    <td><button onclick="clickCell('.')">.</button></td>
+    <td><button style="background-color: rgb(141, 226, 43);" onclick="tinhToan()">=</button></td>
+    <td><button class="mau-xam" onclick="clickCell('/')">/</button></td>
+    
+</tr>
+
+</table>
+        
+</body>
+<script>
+    // a += b <=> a = a + b;
+    // Giá trị truyền vào hàm: tham số
+    function clickCell(value) { //value = bằng giá truyền vào khi gọi hàm
+        // gán 0 vao man hình
+        if (document.getElementById('man-hinh').innerText == '0') {
+            document.getElementById('man-hinh').innerText = value;
+        } else {
+            document.getElementById('man-hinh').innerText += value;
+
+        }
+    }
+
+    function tinhToan() {
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let ketQua = eval(bieuThuc);
+        document.getElementById('bieu-thuc').innerText = bieuThuc + "=";
+        document.getElementById("man-hinh").innerText = ketQua;
+    }
+
+    function xoaKyTu() {
+        // substring xóa chuỗi length độ dài
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let kq = bieuThuc.substring(0, bieuThuc.length - 1);
+        document.getElementById("man-hinh").innerText = kq;
+    }
+
+    function xoaManHinh() {
+        document.getElementById('man-hinh').innerText = '0';
+        document.getElementById('bieu-thuc').innerText = "";
+    }
+    function tinhSin() {
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let ketQua = Math.sin(bieuThuc);
+        document.getElementById("man-hinh").innerText = ketQua;
+    }
+    function tinhtan() {
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let kq = Math.tan(bieuThuc);
+         document.getElementById("man-hinh").innerText = kq;
+    }
+    function tinhlog() {
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let kq1 = Math.log(bieuThuc);
+         document.getElementById("man-hinh").innerText = kq1;
+    }
+    function tinhrad() {
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let kq2 = Math.random(bieuThuc);
+         document.getElementById("man-hinh").innerText = kq2;
+    }
+    function tinhcos() {
+        let bieuThuc = document.getElementById("man-hinh").innerText;
+        let kq3 = Math.cos(bieuThuc);
+         document.getElementById("man-hinh").innerText = kq3;
+    }
+</script>
+</html>
